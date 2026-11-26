@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visitor Registration | SynthoQuest</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head><body><main class="shell">
+<header class="brand">
+<img src="{{ url_for('static', filename='images/synthoquest-logo.png') }}" alt="SynthoQuest logo">
+<div><small>SYNTHOQUEST PRIVATE LIMITED</small><h1>Visitor Helper Desk</h1><p>Visitor Registration Portal</p></div>
+</header>
+<section class="intro"><div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<span class="eyebrow">WELCOME</span><h2>Welcome to SynthoQuest</h2>
+<p>Please share your details to register your visit. Fields marked <b>*</b> are required.</p></section>
+<form id="visitorForm" class="card" novalidate><input type="hidden" id="publicCsrf" value="{{ public_csrf }}">
+<div class="form-title"><h2>Visitor Details</h2><p>Complete the form below to continue.</p></div>
+<div class="grid">
+<div class="field full"><label for="fullName">Full Name <b>*</b></label><input id="fullName" name="fullName" type="text" autocomplete="name" placeholder="Enter your full name" maxlength="100" required><small id="fullNameError" class="error"></small></div>
+<div class="field full"><label for="mobile">Mobile Number <b>*</b></label><div class="phone"><span>+91</span><input id="mobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="10-digit mobile number" maxlength="10" required></div><small class="hint">Enter your mobile number for visitor registration.</small><small id="mobileError" class="error"></small></div>
+<div class="field"><label for="visitorType">Visitor Type <b>*</b></label><select id="visitorType" name="visitorType" required><option value="">Select visitor type</option><option>Student</option><option>College Faculty / HOD</option><option>Corporate Visitor</option><option>Job Candidate</option><option>Internship Candidate</option><option>Vendor</option><option>Guest</option><option>Other</option></select><small id="visitorTypeError" class="error"></small></div>
+<div class="field"><label for="organization">College / Designation / Occupation <span class="optional">(Optional)</span></label><input id="organization" name="organization" type="text" placeholder="Enter college, designation, or occupation (optional)" maxlength="150"><small id="organizationError" class="error"></small></div>
+<div class="field"><label for="email">Email Address</label><input id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" maxlength="150"><small id="emailError" class="error"></small></div>
+<div class="field"><label for="personToMeet">Person / Department to Meet <b>*</b></label><input id="personToMeet" name="personToMeet" type="text" placeholder="Name or department" maxlength="100" required><small id="personToMeetError" class="error"></small></div>
+<div class="field full"><label for="purpose">Purpose of Visit <b>*</b></label><input id="purpose" name="purpose" type="text" placeholder="Type your purpose of visit" maxlength="250" required><small id="purposeError" class="error"></small></div>
+<div class="field full"><label for="notes">If you require any further information or clarification, please feel free to reach out to us.</label><textarea id="notes" name="notes" rows="3" maxlength="500" placeholder="Anything else you'd like us to know (optional)"></textarea></div>
+</div>
+<div class="field full selfie-field">
+<label>Visitor Selfie <b>*</b></label>
+<p class="selfie-help">Tap Upload Selfie to capture a photo. A photo is required. Desktop webcam requires HTTPS or localhost.</p>
+<input type="file" id="selfieInput" accept="image/*" capture="user" required hidden>
+<button type="button" id="openCamera" class="camera-button">📷 Upload Selfie</button>
+<div id="cameraPanel" class="camera-panel" hidden>
+<video id="selfieVideo" autoplay playsinline muted></video>
+<div class="camera-actions"><button type="button" id="captureSelfie" class="camera-button">Take Selfie</button><button type="button" id="closeCamera" class="camera-cancel">Close Camera</button></div>
+</div>
+<div id="selfiePreviewWrap" class="selfie-preview" hidden>
+<img id="selfiePreview" alt="Captured selfie preview">
+<div class="camera-actions"><button type="button" id="retakeSelfie" class="camera-button">Retake</button><button type="button" id="removeSelfie" class="camera-cancel">Remove Photo</button></div>
+</div>
+<small id="selfieStatus" class="hint" role="status" aria-live="polite">No selfie selected.</small>
+<small id="selfieError" class="error"></small>
+</div>
+<div class="privacy"><span>i</span><p>Your details are used for visitor registration and reception assistance.</p></div>
+<button class="submit" type="submit">Register <span>→</span></button>
+<p class="phase">Visitor registration storage</p><div id="formMessage" class="message" role="status" aria-live="polite"></div>
+
+<section id="successPanel" class="success-panel" hidden role="status" aria-live="polite">
+  <div class="success-check">✓</div>
+  <h2>Registration Successful!</h2>
+  <p class="success-appointment">Your appointment is granted.</p>
+  <p>Please wait for 5 minutes. Our team will assist you shortly.</p>
+  <p class="success-brochure">Until then, you can visit our brochure.</p>
+</section>
+</form><footer><p>Visitor Registration Portal</p><p>Please contact the reception desk if you need assistance.</p><a class="brochure-button" href="{{ url_for('static', filename='brochures/company-brochure.pdf') }}" target="_blank" rel="noopener noreferrer">View Our Brochure <span aria-hidden="true">↗</span></a><div class="footerline"></div></footer>
+</main><script src="{{ url_for('static', filename='js/main.js') }}"></script></body></html>
